@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/vahiddaryanush/pertext/actions/workflows/ci.yml/badge.svg)](https://github.com/vahiddaryanush/pertext/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-![Python 3.9+](https://img.shields.io/badge/python-3.9%2B-blue.svg)
+![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)
 ![Dependencies: none](https://img.shields.io/badge/dependencies-none-brightgreen.svg)
 
 Zero-dependency Python library and CLI for **Persian (Farsi) text normalization** and **Jalali (Solar Hijri) ↔ Gregorian date conversion**.
@@ -26,7 +26,7 @@ Persian text found in the wild is messy: Arabic *yeh* and *kaf* mixed with the P
 pip install pertext
 ```
 
-Requires Python 3.9 or newer. No third-party dependencies.
+Requires Python 3.10 or newer. No third-party dependencies.
 
 ## Quick start
 

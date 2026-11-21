@@ -7,7 +7,7 @@ name = "pertext"
 dynamic = ["version"]
 description = "Zero-dependency Persian text normalization and Jalali (Solar Hijri) date conversion."
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 license = "MIT"
 license-files = ["LICENSE"]
 keywords = ["persian", "farsi", "nlp", "normalization", "jalali", "solar-hijri", "zwnj"]
