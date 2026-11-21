@@ -7,7 +7,7 @@
 - Letter set used by spacing/punctuation rules is now explicit (excludes tatweel).
 - README: install instructions no longer claim a PyPI release; Latin-text and
   calendar-accuracy statements corrected.
-- More tests (75 total).
+- Reference test suites for Persian normalization (each case documents its reason) and for known Jalali dates; 134 tests total.
 
 ## 0.1.0
 
