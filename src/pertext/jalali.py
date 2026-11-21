@@ -1,8 +1,11 @@
 """Gregorian <-> Jalali (Solar Hijri) date conversion using pure arithmetic.
 
-The conversion uses the 33-year arithmetic approximation of the Jalali
-calendar, which agrees with the official astronomical calendar for the
-modern era (roughly 1178-1633 AP / 1800-2254 CE).
+The conversion uses the 33-year arithmetic rule for the Jalali calendar.
+The official Iranian calendar is defined astronomically, so an arithmetic
+rule can differ from it in some years. This module has not been verified
+against an independent astronomical reference; it is checked against known
+dates (Nowruz and leap years) and by round-trip tests. Years must be in
+1-9999; accuracy outside the modern era is not guaranteed.
 """
 
 from __future__ import annotations
@@ -106,7 +109,11 @@ def jalali_month_length(jy: int, jm: int) -> int:
 
 
 def format_jalali(jy: int, jm: int, jd: int, *, long: bool = False) -> str:
-    """Format as ``1405/08/29`` or, with ``long=True``, ``29 آبان 1405``."""
+    """Format as ``1405/08/29`` or, with ``long=True``, ``29 آبان 1405``.
+
+    Raises ``ValueError`` for an invalid Jalali date.
+    """
+    _validate_jalali(jy, jm, jd)
     if long:
         return f"{jd} {JALALI_MONTHS[jm - 1]} {jy}"
     return f"{jy:04d}/{jm:02d}/{jd:02d}"
@@ -121,7 +128,13 @@ def parse_date(text: str) -> DateTuple:
     return y, m, d
 
 
+MIN_YEAR = 1
+MAX_YEAR = 9999
+
+
 def _validate_gregorian(y: int, m: int, d: int) -> None:
+    if not MIN_YEAR <= y <= MAX_YEAR:
+        raise ValueError(f"year out of supported range ({MIN_YEAR}-{MAX_YEAR}): {y}")
     if not 1 <= m <= 12:
         raise ValueError(f"invalid Gregorian month: {m}")
     lengths = (31, 29 if is_gregorian_leap(y) else 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31)
@@ -130,6 +143,8 @@ def _validate_gregorian(y: int, m: int, d: int) -> None:
 
 
 def _validate_jalali(y: int, m: int, d: int) -> None:
+    if not MIN_YEAR <= y <= MAX_YEAR:
+        raise ValueError(f"year out of supported range ({MIN_YEAR}-{MAX_YEAR}): {y}")
     if not 1 <= m <= 12:
         raise ValueError(f"invalid Jalali month: {m}")
     if not 1 <= d <= jalali_month_length(y, m):

@@ -19,7 +19,7 @@ except ImportError:  # pragma: no cover
 ZWNJ = "‌"  # zero-width non-joiner ("نیم‌فاصله")
 
 # Arabic letters plus the Persian-only letters (پ چ ژ ک گ ی ۀ).
-_L = "ء-يپچژکگیۀ"
+_L = "\u0621-\u063f\u0641-\u064a\u067e\u0686\u0698\u06a9\u06af\u06cc\u06c0"
 
 _LATIN_DIGITS = "0123456789"
 _ARABIC_DIGITS = "٠١٢٣٤٥٦٧٨٩"

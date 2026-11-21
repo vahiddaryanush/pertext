@@ -89,3 +89,19 @@ def test_format():
     assert format_jalali(1405, 8, 29) == "1405/08/29"
     assert format_jalali(1405, 1, 5) == "1405/01/05"
     assert format_jalali(1405, 8, 29, long=True) == "29 آبان 1405"
+
+
+@pytest.mark.parametrize("args", [(1405, 0, 5), (1405, 13, 5), (1405, 7, 31), (0, 1, 1), (10000, 1, 1)])
+def test_format_validates_input(args):
+    with pytest.raises(ValueError):
+        format_jalali(*args)
+    with pytest.raises(ValueError):
+        format_jalali(*args, long=True)
+
+
+@pytest.mark.parametrize("year", [0, -5, 10000])
+def test_year_range_is_enforced(year):
+    with pytest.raises(ValueError):
+        gregorian_to_jalali(year, 1, 1)
+    with pytest.raises(ValueError):
+        jalali_to_gregorian(year, 1, 1)

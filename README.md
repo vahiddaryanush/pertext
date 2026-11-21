@@ -23,8 +23,10 @@ Persian text found in the wild is messy: Arabic *yeh* and *kaf* mixed with the P
 ## Installation
 
 ```bash
-pip install pertext
+pip install git+https://github.com/vahiddaryanush/pertext.git
 ```
+
+(The package is not on PyPI yet.)
 
 Requires Python 3.10 or newer. No third-party dependencies.
 
@@ -79,8 +81,8 @@ $ pertext normalize input.txt -o output.txt
 ### Design notes
 
 - **Idempotent:** `normalize(normalize(x)) == normalize(x)`.
-- **Conservative:** Latin text, URLs, and code-like strings are left untouched.
-- **Calendar range:** the Jalali conversion uses the 33-year arithmetic rule, which matches the official calendar for the modern era (about 1178–1633 AP). It is tested by round-tripping every day from 1900 to 2100.
+- **Conservative:** Latin letters, URLs, and code-like strings are not rewritten. Whitespace is still collapsed everywhere (disable with a custom pipeline using the individual functions).
+- **Calendar:** the Jalali conversion uses the 33-year arithmetic rule, not the official astronomical definition, so it may differ from the official calendar in some years. It is checked against known dates and by round-tripping every day from 1900 to 2100, but not yet against an independent astronomical reference. Years must be in 1–9999.
 
 ## Development
 

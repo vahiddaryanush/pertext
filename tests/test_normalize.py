@@ -97,3 +97,17 @@ def test_empty_string():
 def test_normalize_is_idempotent(sample):
     once = normalize(sample, digits="fa")
     assert normalize(once, digits="fa") == once
+
+
+def test_latin_letters_and_urls_are_not_rewritten():
+    assert normalize("see https://example.com/a?b=1, ok") == "see https://example.com/a?b=1, ok"
+    assert normalize("Hello,   World;") == "Hello, World;"  # whitespace still collapsed
+
+
+def test_tatweel_kept_when_requested_does_not_break_spacing():
+    assert normalize("کتــاب ها", remove_tatweel=False) == "کتــاب" + ZWNJ + "ها"
+
+
+def test_words_that_only_look_like_verb_prefixes_are_untouched():
+    assert normalize("میز بزرگ") == "میز بزرگ"
+    assert normalize("نمیر") == "نمیر"
